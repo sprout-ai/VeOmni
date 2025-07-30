@@ -7,3 +7,4 @@ sphinx-markdown-tables
 
 # crate-docs-theme
 sphinx-rtd-theme
+myst_parser

@@ -19,7 +19,7 @@
 
 project = "VeOmni"
 # pylint: disable=W0622
-copyright = "2025 ByteDance Seed Foundation MLSys Team"
+copyright = "2025 ByteDance Seed Foundation"
 author = "Qianli Ma, Yaowei Zheng, Zhongkai Zhao, Bin jia, Ziyue Huang, Zhelun Shi, Zhi Zhang"
 
 
@@ -31,13 +31,19 @@ master_doc = "index"
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    "recommonmark",
     "sphinx.ext.autosectionlabel",
+    "sphinx.ext.autodoc",
+    "sphinx.ext.viewcode",
+    "sphinx.ext.napoleon",
+    "myst_parser",
 ]
 
 # The suffix(es) of source filenames.
 # You can specify multiple suffix as a list of string:
-source_suffix = [".rst", "rest", ".md"]
+source_suffix = {
+    ".rst": None,
+    ".md": None,
+}
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ["_templates"]
@@ -65,4 +71,31 @@ html_theme = "sphinx_rtd_theme"
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ["_static"]
+html_static_path = ["_static", "../assets"]
+
+# Copy additional asset directories - these will be copied to the root of the build
+html_extra_path = []
+
+# -- MyST configuration ------------------------------------------------------
+myst_enable_extensions = [
+    "colon_fence",
+    "deflist",
+    "html_image",
+    "attrs_inline",
+]
+
+# Suppress warnings for missing reference targets
+suppress_warnings = ["ref.any", "myst.xref_missing", "toc.no_title"]
+
+# Configure how to handle external links to source files
+myst_url_schemes = ["http", "https", "file"]
+
+# MyST configuration for handling assets
+myst_html_meta = {
+    "description": "VeOmni Documentation",
+    "keywords": "VeOmni, documentation",
+}
+
+# Enable relative path resolution for assets
+myst_substitutions = {}
+myst_heading_anchors = 3
