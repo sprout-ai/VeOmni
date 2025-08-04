@@ -1,5 +1,5 @@
 model:
-  model_path: Qwen/Qwen2.5-7B-Instruct
+  model_path: Qwen/Qwen3-4B
   attn_implementation: flash_attention_2
 
 data:
@@ -13,7 +13,7 @@ data:
   drop_last: true
 
 train:
-  output_dir: Qwen2.5-7B-Instruct_CT
+  output_dir: Qwen/Qwen3-4B-SFT
   data_parallel_mode: fsdp1
   ulysses_parallel_size: 1
   global_batch_size: 32
