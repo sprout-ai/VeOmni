@@ -4,17 +4,19 @@ model:
 
 data:
   train_path: fineweb
-  train_size: 1000000000000
+  train_size: 29259064320 # 11156 * 32 * 8196 * 10 = num_samples * global_batch_size * max_seq_len * num_epochs
   dataloader_type: native
   data_type: conversation
-  chat_template: default
+  chat_template: chatml
   max_seq_len: 8192
   text_keys: messages
   drop_last: true
+  datasets_type: mapping
 
 train:
+  max_steps: 3486 # num_samples / global_batch_size * num_epochs = 11156 / 32 * 10
   output_dir: Qwen/Qwen3-4B-SFT
-  data_parallel_mode: fsdp1
+  data_parallel_mode: ddp # fsdp1 for multinode/gpus
   ulysses_parallel_size: 1
   global_batch_size: 32
   micro_batch_size: 1
@@ -24,23 +26,23 @@ train:
   dyn_bsz_margin: 0
   dyn_bsz_buffer_size: 200
   optimizer: adamw
-  lr: 3.0e-4
-  lr_warmup_ratio: 0.007
-  lr_decay_style: constant
-  lr_decay_ratio: 1.0
-  weight_decay: 0.01
+  lr: 1e-5
+  lr_warmup_ratio: 0.1
+  lr_decay_style: cosine
+  lr_decay_ratio: 0.5
+  weight_decay: 0.001
   max_grad_norm: 1.0
   enable_mixed_precision: false
   enable_gradient_checkpointing: true
-  enable_full_shard: true
+  enable_full_shard: false
   enable_fsdp_offload: false
   enable_activation_offload: false
-  init_device: meta
+  init_device: cuda
   enable_full_determinism: false
   empty_cache_steps: 500
   ckpt_manager: bytecheckpoint
   load_checkpoint_path: ""
   save_steps: 100
   save_hf_weights: true
-  wandb_project: Qwen2.5-7B-Instruct
-  wandb_name: Qwen2.5-7B-Instruct-CT
+  wandb_project: Qwen3-4B-SFT
+  wandb_name: Qwen3-4B-SFT

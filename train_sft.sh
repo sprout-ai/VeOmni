@@ -1,14 +1,3 @@
 bash train.sh tasks/train_torch.py configs/sft/qwen3_4b.yaml \
     --model.model_path ./Qwen3-4B \
-    --data.train_path /home/ubuntu/thanhuswest3/lib-ds/lib_ds/models/llm/policy_checking/data/claim_decisions_sft.jsonl \
-    --data.data_type conversation \
-    --data.chat_template chatml \
-    --train.global_batch_size 64 \
-    --train.lr 5e-7 \
-    --train.ulysses_parallel_size 1 \
-    --train.save_steps 100 \
-    --train.max_steps 200 \
-    --train.output_dir Qwen3-4B-SFT \
-    --train.init_device cuda \
-    --train.enable_full_shard false \
-    --train.data_parallel_mode ddp
+    --data.train_path /home/ubuntu/thanhuswest3/lib-ds/lib_ds/models/llm/policy_checking/data/claim_decisions_sft.jsonl
